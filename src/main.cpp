@@ -99,14 +99,7 @@ void competition_initialize() {}
 
 void opcontrol() {
 
-	BankAccount JathanBank(1000);
-
-	JathanBank.deposit(1000);
-
-	JathanBank.withdraw(2000);
-
-	double JathanBalance = JathanBank.getBalance();
-
+moveForward(48);
 	while (true) {
 		driveOP();
 		wait(10);

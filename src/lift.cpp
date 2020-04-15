@@ -1,12 +1,25 @@
 #include "main.h"
 
-pros::Motor liftMotor(1, pros::E_MOTOR_GEARSET_36, false, pros::E_MOTOR_ENCODER_DEGREES);
+pros::Motor liftMotor(5, pros::E_MOTOR_GEARSET_36, false, pros::E_MOTOR_ENCODER_DEGREES);
 
-pros::ADIPotentiometer pot('B');
+pros::ADIPotentiometer pot('A');
 
 pros::ADILineSensor line('G');
 
 PIDController liftPID(2,2);
+
+void lift(int speed) {
+  liftMotor.move(speed);
+}
+
+void brake() {
+  liftMotor.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+}
+
+void coast() {
+  liftMotor.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+}
+
 
 void test() {
   if(line.get_value() < 200 && line.get_value() > 100){
@@ -17,8 +30,10 @@ void test() {
   }
 }
 
-void lift(int speed) {
-  liftMotor.move(speed);
+void liftMoveTime(int time, int speed) {
+  lift(speed);
+  wait(time);
+  lift(0);
 }
 
 void liftBrake(){
@@ -58,7 +73,7 @@ liftMotor.move_velocity(100);
 }
 
 else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-liftMotor.move_velocity(100);
+liftMotor.move_velocity(-100);
 }
 else {
 liftMotor.move_velocity(0);

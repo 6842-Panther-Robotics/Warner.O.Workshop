@@ -45,7 +45,7 @@ void right(int speed) {
   rightBack.move(speed);
 }
 
-void hold() {
+void brake() {
   rightFront.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
   rightBack.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
   leftFront.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
